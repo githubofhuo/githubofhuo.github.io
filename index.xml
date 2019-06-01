@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My New Hugo Site</title>
+    <link>https://githubofhuo.github.io/</link>
+    <description>Recent content on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 01 Jun 2019 14:30:04 +0800</lastBuildDate>
+    
+	<atom:link href="https://githubofhuo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>mask-rcnn install</title>
+      <link>https://githubofhuo.github.io/post/blog/</link>
+      <pubDate>Sat, 01 Jun 2019 14:30:04 +0800</pubDate>
+      
+      <guid>https://githubofhuo.github.io/post/blog/</guid>
+      <description>Installation Requirements:  PyTorch 1.0 from a nightly release. It will not work with 1.0 nor 1.0.1. Installation instructions can be found in https://pytorch.org/get-started/locally/ torchvision from master cocoapi yacs matplotlib GCC &amp;gt;= 4.9 OpenCV  Option 1: Step-by-step installation # first, make sure that your conda is setup properly with the right environment # for that, check that `which conda`, `which pip` and `which python` points to the # right path.</description>
+    </item>
+    
+  </channel>
+</rss>

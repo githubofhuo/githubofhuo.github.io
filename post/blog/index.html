@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>mask-rcnn install // My New Hugo Site</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://githubofhuo.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="mask-rcnn install"/>
+<meta name="twitter:description" content="Installation Requirements:  PyTorch 1.0 from a nightly release. It will not work with 1.0 nor 1.0.1. Installation instructions can be found in https://pytorch.org/get-started/locally/ torchvision from master cocoapi yacs matplotlib GCC &gt;= 4.9 OpenCV  Option 1: Step-by-step installation # first, make sure that your conda is setup properly with the right environment # for that, check that `which conda`, `which pip` and `which python` points to the # right path."/>
+
+    <meta property="og:title" content="mask-rcnn install" />
+<meta property="og:description" content="Installation Requirements:  PyTorch 1.0 from a nightly release. It will not work with 1.0 nor 1.0.1. Installation instructions can be found in https://pytorch.org/get-started/locally/ torchvision from master cocoapi yacs matplotlib GCC &gt;= 4.9 OpenCV  Option 1: Step-by-step installation # first, make sure that your conda is setup properly with the right environment # for that, check that `which conda`, `which pip` and `which python` points to the # right path." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://githubofhuo.github.io/post/blog/" />
+<meta property="article:published_time" content="2019-06-01T14:30:04&#43;08:00"/>
+<meta property="article:modified_time" content="2019-06-01T14:30:04&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://githubofhuo.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>My New Hugo Site</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">mask-rcnn install</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 1, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="requirements">Requirements:</h3>
+
+<ul>
+<li>PyTorch 1.0 from a nightly release. It <strong>will not</strong> work with 1.0 nor 1.0.1. Installation instructions can be found in <a href="https://pytorch.org/get-started/locally/">https://pytorch.org/get-started/locally/</a></li>
+<li>torchvision from master</li>
+<li>cocoapi</li>
+<li>yacs</li>
+<li>matplotlib</li>
+<li>GCC &gt;= 4.9</li>
+<li>OpenCV</li>
+</ul>
+
+<h3 id="option-1-step-by-step-installation">Option 1: Step-by-step installation</h3>
+
+<pre><code class="language-bash"># first, make sure that your conda is setup properly with the right environment
+# for that, check that `which conda`, `which pip` and `which python` points to the
+# right path. From a clean conda env, this is what you need to do
+
+conda create --name maskrcnn_benchmark
+conda activate maskrcnn_benchmark
+
+# this installs the right pip and dependencies for the fresh python
+conda install ipython
+
+# maskrcnn_benchmark and coco api dependencies
+pip install ninja yacs cython matplotlib tqdm opencv-python
+
+# follow PyTorch installation in https://pytorch.org/get-started/locally/
+# we give the instructions for CUDA 9.0
+conda install -c pytorch pytorch-nightly torchvision cudatoolkit=9.0
+
+export INSTALL_DIR=$PWD
+
+# install pycocotools
+cd $INSTALL_DIR
+git clone https://github.com/cocodataset/cocoapi.git
+cd cocoapi/PythonAPI
+python setup.py build_ext install
+
+# install apex
+cd $INSTALL_DIR
+git clone https://github.com/NVIDIA/apex.git
+cd apex
+python setup.py install --cuda_ext --cpp_ext
+
+# install PyTorch Detection
+cd $INSTALL_DIR
+git clone https://github.com/facebookresearch/maskrcnn-benchmark.git
+cd maskrcnn-benchmark
+
+# the following will install the lib with
+# symbolic links, so that you can modify
+# the files if you want and won't need to
+# re-build it
+python setup.py build develop
+
+
+unset INSTALL_DIR
+
+# or if you are on macOS
+# MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CXX=clang++ python setup.py build develop
+</code></pre>
+
+<h4 id="windows-10">Windows 10</h4>
+
+<pre><code class="language-bash">open a cmd and change to desired installation directory 
+from now on will be refered as INSTALL_DIR 
+conda create --name maskrcnn_benchmark
+conda activate maskrcnn_benchmark
+
+# this installs the right pip and dependencies for the fresh python
+conda install ipython
+
+# maskrcnn_benchmark and coco api dependencies
+pip install ninja yacs cython matplotlib tqdm opencv-python
+
+# follow PyTorch installation in https://pytorch.org/get-started/locally/
+# we give the instructions for CUDA 9.0
+## Important : check the cuda version installed on your computer by running the command in the cmd : 
+nvcc -- version 
+conda install -c pytorch pytorch-nightly torchvision cudatoolkit=9.0
+
+git clone https://github.com/cocodataset/cocoapi.git
+    
+    #To prevent installation error do the following after commiting cocooapi : 
+    #using file explorer  naviagate to cocoapi\PythonAPI\setup.py and change line 14 from:
+    #extra_compile_args=['-Wno-cpp', '-Wno-unused-function', '-std=c99'],
+    #to
+    #extra_compile_args={'gcc': ['/Qstd=c99']},
+    #Based on  https://github.com/cocodataset/cocoapi/issues/51
+
+cd cocoapi/PythonAPI
+python setup.py build_ext install
+
+# navigate back to INSTALL_DIR
+cd ..
+cd .. 
+# install apex
+
+git clone https://github.com/NVIDIA/apex.git
+cd apex
+python setup.py install --cuda_ext --cpp_ext
+# navigate back to INSTALL_DIR
+cd .. 
+# install PyTorch Detection
+
+git clone https://github.com/Idolized22/maskrcnn-benchmark.git
+cd maskrcnn-benchmark
+
+# the following will install the lib with
+# symbolic links, so that you can modify
+# the files if you want and won't need to
+# re-build it
+python setup.py build develop
+</code></pre>
+
+<h3 id="option-2-docker-image-requires-cuda-linux-only">Option 2: Docker Image (Requires CUDA, Linux only)</h3>
+
+<p>Build image with defaults (<code>CUDA=9.0</code>, <code>CUDNN=7</code>, <code>FORCE_CUDA=1</code>):</p>
+
+<pre><code>nvidia-docker build -t maskrcnn-benchmark docker/
+</code></pre>
+
+<p>Build image with other CUDA and CUDNN versions:</p>
+
+<pre><code>nvidia-docker build -t maskrcnn-benchmark --build-arg CUDA=9.2 --build-arg CUDNN=7 docker/
+</code></pre>
+
+<p>Build image with FORCE_CUDA disabled:</p>
+
+<pre><code>nvidia-docker build -t maskrcnn-benchmark --build-arg FORCE_CUDA=0 docker/
+</code></pre>
+
+<p>Build and run image with built-in jupyter notebook(note that the password is used to log in jupyter notebook):</p>
+
+<pre><code>nvidia-docker build -t maskrcnn-benchmark-jupyter docker/docker-jupyter/
+nvidia-docker run -td -p 8888:8888 -e PASSWORD=&lt;password&gt; -v &lt;host-dir&gt;:&lt;container-dir&gt; maskrcnn-benchmark-jupyter
+</code></pre>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
